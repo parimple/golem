@@ -1,5 +1,10 @@
 # 🚀 GOLEM - The Tesla/Apple of Discord Bots
 
+![Build Status](https://github.com/YOUR_USERNAME/golem/actions/workflows/ci.yml/badge.svg)
+![Python](https://img.shields.io/badge/python-3.10+-blue.svg)
+![Discord.py](https://img.shields.io/badge/discord.py-2.3+-blue.svg)
+![License](https://img.shields.io/badge/license-MIT-green.svg)
+
 > "Simplicity is the ultimate sophistication" - Leonardo da Vinci  
 > "The best part is no part" - Elon Musk  
 > "It just works" - Steve Jobs
