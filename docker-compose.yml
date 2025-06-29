@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  golem:
+    image: golem:latest
+    container_name: golem
+    restart: always
+    env_file:
+      - .env.prod
+    volumes:
+      - ./logs:/app/logs
+      - ./data:/app/data
+    healthcheck:
+      test: ["CMD", "python", "-c", "import discord; print('healthy')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+        reservations:
+          memory: 512M
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # Optional: PostgreSQL for future
+  # postgres:
+  #   image: postgres:15-alpine
+  #   container_name: golem-db
+  #   restart: always
+  #   environment:
+  #     POSTGRES_DB: golem
+  #     POSTGRES_USER: golem
+  #     POSTGRES_PASSWORD: ${DB_PASSWORD}
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "pg_isready -U golem"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
+
+volumes:
+  postgres_data:
