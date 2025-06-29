@@ -1,0 +1,146 @@
+name: GOLEM CI/CD
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
+    
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install flake8 pytest pytest-asyncio
+    
+    - name: Run flake8
+      run: |
+        # Stop the build if there are Python syntax errors or undefined names
+        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        # Exit-zero treats all errors as warnings
+        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+    
+    - name: Run integration tests
+      run: |
+        chmod +x test.sh
+        ./test.sh
+    
+    - name: Run memory lint
+      run: |
+        python tests/test_memory_lint.py
+    
+    - name: Check cog loading
+      run: |
+        python tests/test_cog_loading.py
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+    
+    - name: Build Docker image
+      run: |
+        docker build -t golem:${{ github.sha }} .
+    
+    - name: Save Docker image
+      run: |
+        docker save golem:${{ github.sha }} > golem-image.tar
+    
+    - name: Upload Docker image
+      uses: actions/upload-artifact@v3
+      with:
+        name: golem-docker-image
+        path: golem-image.tar
+        retention-days: 7
+
+  deploy-dev:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/develop'
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Download Docker image
+      uses: actions/download-artifact@v3
+      with:
+        name: golem-docker-image
+    
+    - name: Deploy to dev server
+      env:
+        DEV_HOST: ${{ secrets.DEV_HOST }}
+        DEV_USER: ${{ secrets.DEV_USER }}
+        DEV_SSH_KEY: ${{ secrets.DEV_SSH_KEY }}
+      run: |
+        # This is a placeholder for actual deployment
+        echo "Would deploy to dev server at $DEV_HOST"
+        # In real deployment:
+        # - Copy image to server
+        # - Load image
+        # - Stop old container
+        # - Start new container with .env.dev
+
+  notify:
+    needs: [test, build]
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+    - name: Send Discord notification
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      run: |
+        if [ "${{ needs.test.result }}" == "success" ] && [ "${{ needs.build.result }}" == "success" ]; then
+          STATUS="✅ Success"
+          COLOR="3066993"
+        else
+          STATUS="❌ Failed"
+          COLOR="15158332"
+        fi
+        
+        curl -X POST $DISCORD_WEBHOOK \
+          -H "Content-Type: application/json" \
+          -d "{
+            \"embeds\": [{
+              \"title\": \"GOLEM CI/CD $STATUS\",
+              \"description\": \"Build #${{ github.run_number }} on branch ${{ github.ref_name }}\",
+              \"color\": $COLOR,
+              \"fields\": [
+                {
+                  \"name\": \"Commit\",
+                  \"value\": \"${{ github.sha }}\",
+                  \"inline\": true
+                },
+                {
+                  \"name\": \"Author\",
+                  \"value\": \"${{ github.actor }}\",
+                  \"inline\": true
+                }
+              ]
+            }]
+          }"

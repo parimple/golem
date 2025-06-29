@@ -1,0 +1,16 @@
+# GOLEM Core Requirements
+discord.py>=2.3.0
+python-dotenv>=1.0.0
+aiohttp>=3.9.0
+
+# Basic functionality
+asyncio
+logging
+
+# Optional but recommended
+psutil>=5.9.0  # For system monitoring
+numpy>=1.24.0  # For neural networks
+
+# Development
+pytest>=7.4.0
+pytest-asyncio>=0.21.0

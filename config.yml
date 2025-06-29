@@ -1,0 +1,410 @@
+prefix: ","
+description: "Hello, my name is zaGadka"
+guild_id: 960665311701528596
+donate_url: "https://tipply.pl/u/zagadka"
+# Owner configuration - supports multiple owners
+owner_ids:  # List of all owner IDs
+  - 956602391891947592  # Main owner
+  - 968632323916566579  # Original test user  
+  - 1387857653748732046  # claude_username for Discord API testing
+  - 489328381972971520  # Authorization ID - owner permissions
+owner_id: 956602391891947592  # Backward compatibility
+
+# Emoji configuration
+emojis:
+  proxy_bunny: "<a:bunnyProxy:1301144820349403157>"
+  mastercard: "<:mastercard:1270433919233425545>"
+  # Bump service emojis
+  disboard: "<:botDisboard:1336275527241044069>"
+  dzik: "<:botDzik:1336275532991565824>"
+  discadia: "<:botDiscadia:1336275880703561758>"
+  discordservers: "<:botDiscordServers:1336322514170806383>"
+  dsme: "<:botDSME:1336311501765476352>"
+
+# Konfiguracja systemu legacy - do usunięcia po migracji
+legacy_system:
+  enabled: true
+  amounts:
+    15: 49  # zG50
+    25: 99  # zG100
+    45: 499  # zG500
+    85: 999  # zG1000
+
+channels:
+  on_join: 1105588284555546634
+  lounge: 1143990867946913845
+  donation: 960665312200626201
+  premium_info: 960665316109713421
+  bots: 960665312200626198  # Added bots channel
+  mute_notifications: 1336368306940018739  # Kanał do powiadomień o przywróconych wyciszeniach
+  mute_logs: 1379568677623562300  # Kanał do logowania wyciszeń (mute)
+  unmute_logs: 1379568677623562300  # Kanał do logowania odciszeń (unmute) - obecnie ten sam co mute_logs
+  test_channel: 1387864734002446407  # Kanał do testowania komend
+
+# Kategoria testowa zaGadka
+test_category:
+  name: "🧪 zaGadka Testing"
+  channels:
+    commands: "zagadka-commands"     # Kanał do testowania komend
+    logs: "zagadka-logs"             # Logi bota
+    errors: "zagadka-errors"         # Błędy i wyjątki
+    analytics: "zagadka-analytics"   # Statystyki użycia
+    voice_create: "➕ Stwórz kanał"  # Kanał do tworzenia kanałów głosowych
+
+gifs:
+  donation: "https://media1.tenor.com/m/tn_MOQB9pV4AAAAd/tony-tonylife.gif"
+
+channels_voice:
+  afk: 1052997299233636402
+
+channel_emojis: ['🍏', '🍎', '🍐', '🍊', '🍋', '🍌', '🍉', '🍇', '🍓', '🍈', '🍒', '🍑',
+          '🥭', '🍍', '🥥', '🥝', '🍅', '🍆', '🥑', '🥦', '🥬', '🥒', '🌶', '️🌽', '🥕', '🧅', '🧄', '🥔', '🍠', '🎃',
+          '🫑', '🫒', '🍄']
+
+channel_name_formats:
+  1325439940351229962: "{emoji} public"    # publ
+  1325440354648068206: "{emoji} max²"      # max²
+  1325440407605346335: "{emoji} max³"      # max³
+  1325440479499649075: "{emoji} max⁴"      # max⁴
+  1325440557161648160: "{emoji} max⁵"      # max⁵
+
+channels_create:
+  - 1325445547586359307  # git ultra
+  - 1057676020209168436  # git pro
+  - 1325445609074987100  # git plus
+  - 1325445576946614274  # git
+  - 1325445737206513727  # priv
+  - 1325445679706935296  # publ
+  - 1325445657858670622  # max2
+  - 1325445711436714095  # max3
+  - 1325445884967780442  # max4
+  - 1325445638002970684  # max5
+
+vc_categories:
+  - 1325436667359662100  # git ultra
+  - 1325436219714441267  # git pro
+  - 1325435639260516442  # git plus
+  - 960665318475325454   # git
+  - 1325439014488117278  # priv
+  - 1325439940351229962  # publ
+  - 1325440354648068206  # max2
+  - 1325440407605346335  # max3
+  - 1325440479499649075  # max4
+  - 1325440557161648160  # max5
+
+# Kategorie gdzie @everyone ma mieć czyste permisje
+clean_permission_categories:
+  - 1325439940351229962  # publ
+  - 1325440354648068206  # max2
+  - 1325440407605346335  # max3
+  - 1325440479499649075  # max4
+  - 1325440557161648160  # max5
+
+# Domyślne limity użytkowników dla różnych typów kanałów
+default_user_limits:
+  git_categories:
+    categories:
+      - 1325436667359662100  # git ultra
+      - 1325436219714441267  # git pro
+      - 1325435639260516442  # git plus
+      - 960665318475325454   # git
+    limit: 99
+  public_categories:
+    categories:
+      - 1325439940351229962  # publ
+    limit: 99
+  max_categories:
+    max2:
+      id: 1325440354648068206
+      limit: 2
+    max3:
+      id: 1325440407605346335
+      limit: 3
+    max4:
+      id: 1325440479499649075
+      limit: 4
+    max5:
+      id: 1325440557161648160
+      limit: 5
+
+max_channels_categories:
+  - 1325440354648068206  # max2
+  - 1325440407605346335  # max3
+  - 1325440479499649075  # max4
+  - 1325440557161648160  # max5
+
+# Role i uprawnienia
+roles:
+  # Role premium (dają pełny dostęp do komend głosowych)
+  premium:
+    - name: "zG50"
+      moderator_count: 1
+    - name: "zG100"
+      moderator_count: 2
+    - name: "zG500"
+      moderator_count: 5
+    - name: "zG1000"
+      moderator_count: 10
+
+  # Role boosterów (wymagają T > 0 do użycia komend głosowych)
+  boosters:
+    - "♵"  # nitro booster
+    - "♼"  # server booster
+
+# Konfiguracja komend głosowych
+voice_commands:
+  # Komendy wymagające premium lub (roli boostera + T > 0)
+  view:
+    require_bypass_if_no_role: true
+    description: "Zarządzanie widocznością kanału"
+  speak:
+    require_bypass_if_no_role: true
+    description: "Zarządzanie uprawnieniami do mówienia"
+  connect:
+    require_bypass_if_no_role: true
+    description: "Zarządzanie uprawnieniami do połączenia"
+  text:
+    require_bypass_if_no_role: true
+    description: "Zarządzanie uprawnieniami do pisania"
+  live:
+    require_bypass_if_no_role: true
+    description: "Zarządzanie uprawnieniami do streamowania"
+
+  # Komendy wymagające tylko premium (bez możliwości użycia T)
+  mod:
+    require_bypass_if_no_role: false
+    description: "Zarządzanie moderatorami kanału"
+    allowed_roles: ["zG50", "zG100", "zG500", "zG1000"]
+
+  # Komendy wymagające wysokiego premium
+  autokick:
+    require_bypass_if_no_role: false
+    description: "Zarządzanie automatycznym wyrzucaniem"
+    allowed_roles: ["zG500", "zG1000"]
+
+# Konfiguracja systemu T (bypass)
+bypass:
+  duration:
+    bump: 12  # godziny dodawane za bump
+    activity: 6  # godziny dodawane za aktywność
+    # Czasy T za głosowanie/bump na różnych serwisach
+    services:
+      disboard: 3      # 3T za bump na Disboard
+      dzik: 3          # 3T za bump na Dziku
+      discadia: 6      # 6T za głos na Discadia
+      discordservers: 6  # 6T za głos na DiscordServers
+      dsme: 3          # 3T za głos na DSME
+  cooldown:
+    disboard: 2      # globalny cooldown w godzinach
+    dzik: 3          # cooldown per user w godzinach
+    discadia: 24     # cooldown per user w godzinach
+    discordservers: 12  # cooldown per user w godzinach
+    dsme: 6          # cooldown per user w godzinach
+  notifications:
+    check_interval: 5  # jak często sprawdzać dostępność (w minutach)
+    messages:
+      disboard: "{mention} Możesz już zbumpować serwer na Disboard! Użyj `/bump` aby otrzymać 3T ❤️"
+      dzik: "{mention} Możesz już zbumpować serwer na Dziku! Użyj `/bump` aby otrzymać 3T ❤️"
+      discadia: "{mention} Możesz już zagłosować na Discadia! Odwiedź stronę: https://discadia.com/vote/polska/ aby otrzymać 6T ❤️"
+      discordservers: "{mention} Możesz już zagłosować na DiscordServers! Odwiedź stronę: https://discordservers.com/server/960665311701528596/bump aby otrzymać 6T ❤️"
+      dsme: "{mention} Możesz już zagłosować na DSME! Odwiedź stronę: https://discords.com/servers/960665311701528596/upvote aby otrzymać 3T ❤️"
+
+mute_roles:
+  - id: 960665311760248873
+    name: "⚠︎"
+    description: "stream_off"
+  - id: 960665311953174559
+    name: "⌀"
+    description: "send_messages_off"
+  - id: 960665311953174558
+    name: "☢︎"
+    description: "attach_files_off"
+  - id: 960665311760248877
+    name: "♺"
+    description: "points_off"
+
+# Domyślny nickname używany przy mutenick
+default_mute_nickname: "random"
+
+color_roles:
+  blue: 960665311730868235
+  green: 960665311730868236
+  red: 960665311730868237
+
+admin_roles:
+  mod: 960665311953174564  # ID roli moderatora (✪)
+  admin: 960665311953174565  # ID roli administratora (✪)
+
+gender_roles:
+  male: 960665311701528599  # ID roli mężczyzny
+  female: 960665311701528600  # ID roli kobiety
+
+# Rangi za aktywność - domyślnie 2 proste rangi
+activity_ranks:
+  enabled: true
+  default_count: 2  # Domyślna liczba rang (bez premium)
+  max_count: 99     # Maksymalna liczba rang (z premium)
+  
+  # Domyślne rangi - proste numery, łatwe do zmiany przez admina
+  default_ranks:
+    - name: "1"
+      points_required: 1000
+      color: "#FFD700"  # Złoty
+    - name: "2" 
+      points_required: 5000
+      color: "#FF69B4"  # Różowy
+  
+  # Opcje premium dla personalizacji rang
+  premium_customization:
+    enabled: true
+    required_role: "zG500"  # Minimalna ranga premium do personalizacji
+    features:
+      - "Własne nazwy dla rang aktywności (1-99)"
+      - "Własne kolory dla każdej rangi"
+      - "Własne progi punktowe"
+      - "Emotki w nazwach rang"
+
+premium_roles:
+  - name: "zG50"
+    premium: "Git"
+    usd: 14
+    price: 49  # 49 zł
+    features:
+      - "Dowolny kolor dostępny za pomocą komendy ?color"
+      - "Dostęp do kanału głosowego Git"
+      - "Dostęp do emotek i stickerów z każdego serwera"
+      - "50% więcej punktów do aktywności"
+    team_size: 0
+    moderator_count: 1
+    points_multiplier: 50   # +50% punktów
+    emojis_access: false     # Dostęp do emotek
+    override_limit: true
+
+  - name: "zG100"
+    premium: "Git Plus"
+    price: 99  # 99 zł
+    usd: 29
+    features:
+      - "Rola na samej górze serwera"
+      - "Kanał drużynowy dla 15 osób"
+      - "Kanał Git Plus do tworzenia kanałów głosowych"
+      - "Moderator kanału głosowego"
+      - "Dostęp do emotek i stickerów z każdego serwera"
+      - "100% więcej punktów do aktywności"
+    team_size: 10
+    moderator_count: 2
+    points_multiplier: 100  # +100% punktów
+    emojis_access: false     # Dostęp do emotek
+    override_limit: true
+
+  - name: "zG500"
+    premium: "Git Pro"
+    price: 499  # 499 zł
+    usd: 149
+    features:
+      - "Rola wyżej niż top1"
+      - "Kanał Git Pro nad lounge do tworzenia kanałów głosowych"
+      - "Drużyna do 30 osób"
+      - "3 moderatorów kanału głosowego"
+      - "Wszyscy w drużynie mają kolor klanu na serwerze"
+      - "Dostęp do emotek i stickerów z każdego serwera"
+      - "200% więcej punktów do aktywności"
+      - "Autokick 1 osoby na każdym kanale"
+    team_size: 20
+    moderator_count: 3
+    points_multiplier: 200  # +20% punktów
+    emojis_access: false    # Dostęp do emotek
+    override_limit: false
+    auto_kick: 1
+
+  - name: "zG1000"
+    premium: "Git Ultra"
+    price: 999  # 999 zł
+    usd: 299
+    features:
+      - "Moderator na serwerze"
+      - "Kanał Git Ultra nad info do tworzenia kanałów głosowych"
+      - "Drużyna do 50 osób"
+      - "6 moderatorów kanału głosowego"
+      - "Wszyscy w drużynie mają kolor klanu na serwerze"
+      - "Moliwość dodania emotki na serwer raz w miesiącu"
+      - "Moliwość dodania odznaki emotki całej drużynie"
+      - "300% więcej punktów do aktywności"
+      - "Autokick 3 osób na każdym kanale"
+    team_size: 30
+    moderator_count: 5
+    points_multiplier: 400  # +400% punktów
+    emojis_access: false     # Dostęp do emotek
+    override_limit: false
+    auto_kick: 3
+
+# Konfiguracja uprawnień głosowych
+voice_permissions:
+  # Role boosterów (wymagają T > 0 do użycia komend głosowych)
+  boosters:
+    - "♵"  # nitro booster
+    - "♼"  # server booster
+
+  # Konfiguracja komend głosowych
+  commands:
+    # Komendy wymagające premium lub (roli boostera + T > 0)
+    view:
+      require_bypass_if_no_role: true
+      description: "Zarządzanie widocznością kanału"
+    speak:
+      require_bypass_if_no_role: true
+      description: "Zarządzanie uprawnieniami do mówienia"
+    connect:
+      require_bypass_if_no_role: true
+      description: "Zarządzanie uprawnieniami do połączenia"
+    text:
+      require_bypass_if_no_role: true
+      description: "Zarządzanie uprawnieniami do pisania"
+    live:
+      require_bypass_if_no_role: true
+      description: "Zarządzanie uprawnieniami do streamowania"
+
+    # Komendy wymagające tylko premium (bez możliwości użycia T)
+    mod:
+      require_bypass_if_no_role: false
+      description: "Zarządzanie moderatorami kanału"
+      allowed_roles: ["zG50", "zG100", "zG500", "zG1000"]
+
+    # Komendy wymagające wysokiego premium
+    autokick:
+      require_bypass_if_no_role: false
+      description: "Zarządzanie automatycznym wyrzucaniem"
+      allowed_roles: ["zG500", "zG1000"]
+
+  # Konfiguracja systemu T (bypass)
+  bypass:
+    duration:
+      bump: 12  # godziny dodawane za bump
+      activity: 6  # godziny dodawane za aktywność
+
+# Konfiguracja dla modułu kolorów
+color:
+  role_name: "✎"  # Nazwa roli kolorowej
+  base_role_id: 960665311772803184  # ID roli, nad którą będzie umieszczana rola kolorowa
+
+# Konfiguracja dla modułu teamów
+team:
+  symbol: "☫"  # Symbol teamu używany w nazwach
+  base_role_id: 960665311730868240  # ID roli, nad którą będą umieszczane role teamów
+  category_id: 1344105013357842522  # ID kategorii dla kanałów teamów
+
+# Kategorie kanałów pomijane przy usuwaniu wiadomości (clearall)
+excluded_categories:
+  - 1127590722015604766
+  - 960665312200626199
+  - 960665312376807530 
+  - 960665315895836698
+  - 960665316109713423
+
+# Konfiguracja dla zadania audytującego role premium
+audit_settings:
+  premium_role_ids_for_audit:
+    - 1306588378829164565  # zG50
+    - 1306588380141846528  # zG100
+    - 1317129475271557221  # zG500
+    - 1321432424101576705  # zG1000
