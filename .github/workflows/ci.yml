@@ -81,6 +81,7 @@ jobs:
   deploy-dev:
     needs: build
     runs-on: ubuntu-latest
+    environment: development
     if: github.ref == 'refs/heads/develop'
     
     steps:
@@ -93,17 +94,37 @@ jobs:
     
     - name: Deploy to dev server
       env:
-        DEV_HOST: ${{ secrets.DEV_HOST }}
-        DEV_USER: ${{ secrets.DEV_USER }}
-        DEV_SSH_KEY: ${{ secrets.DEV_SSH_KEY }}
+        DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+        DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
       run: |
-        # This is a placeholder for actual deployment
-        echo "Would deploy to dev server at $DEV_HOST"
-        # In real deployment:
-        # - Copy image to server
-        # - Load image
-        # - Stop old container
-        # - Start new container with .env.dev
+        echo "Deploying to development environment..."
+        # Real deployment steps would go here
+  
+  deploy-prod:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: production
+    if: github.ref == 'refs/heads/master'
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Download Docker image
+      uses: actions/download-artifact@v3
+      with:
+        name: golem-docker-image
+    
+    - name: Deploy to production
+      env:
+        DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
+        DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+      run: |
+        echo "Deploying to production environment..."
+        # Real deployment steps would go here
 
   notify:
     needs: [test, build]
